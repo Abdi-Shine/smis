@@ -8,9 +8,26 @@ use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Carbon;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\EmployeeImport;
 
 class EmployeeController extends Controller
 {
+    public function UploadEmployee(){
+        return view('admin.backend.employee.upload_employee');
+    }
+
+    public function ImportEmployee(Request $request){
+        Excel::import(new EmployeeImport, $request->file('import_file'));
+
+        $notification = array(
+            'message' => 'Employees Imported Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('view.employee')->with($notification);
+    }
+
     public function ViewEmployee(){
         // Auto-expire employees:
         // 1. If End Date is past (expired).
