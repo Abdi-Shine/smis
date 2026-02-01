@@ -50,9 +50,9 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ route('edit.employee', $item->id) }}" class="btn btn-success btn-sm" title="Edit"><i class="fas fa-pen"></i></a>
-                                            <a href="{{ route('delete.employee', $item->id) }}" class="btn btn-danger btn-sm" id="delete" title="Delete"><i class="fas fa-trash"></i></a>
-                                            <a href="{{ route('preview.employee', $item->id) }}" target="_blank" class="btn btn-warning btn-sm" title="View Detail"><i class="fas fa-eye"></i></a>
+                                            <a href="{{ route('edit.employee', $item->id) }}" class="btn btn-success btn-sm" title="Edit"><i class="fas fa-edit"></i></a>
+                                            <a href="{{ route('delete.employee', $item->id) }}" class="btn btn-danger btn-sm" id="delete" title="Delete"><i class="fas fa-trash-alt"></i></a>
+                                            <a href="{{ route('preview.employee', $item->id) }}" target="_blank" class="btn btn-warning btn-sm text-white" title="View Detail"><i class="fas fa-eye"></i></a>
                                             <a href="{{ route('qr_code.download', $item->id) }}" target="_blank" class="btn btn-info btn-sm" title="Download"><i class="fas fa-download"></i></a>
                                         </td>
                                     </tr>
