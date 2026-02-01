@@ -50,10 +50,10 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ route('edit.employee', $item->id) }}" class="btn btn-success btn-sm" title="Edit"><i class="fas fa-edit"></i></a>
-                                            <a href="{{ route('delete.employee', $item->id) }}" class="btn btn-danger btn-sm" id="delete" title="Delete"><i class="fas fa-trash-alt"></i></a>
-                                            <a href="{{ route('preview.employee', $item->id) }}" target="_blank" class="btn btn-warning btn-sm text-white" title="View Detail"><i class="fas fa-eye"></i></a>
-                                            <a href="{{ route('qr_code.download', $item->id) }}" target="_blank" class="btn btn-info btn-sm" title="Download"><i class="fas fa-download"></i></a>
+                                            <a href="{{ route('edit.employee', $item->id) }}" class="btn btn-success btn-sm" title="Edit">Edit</a>
+                                            <a href="{{ route('delete.employee', $item->id) }}" class="btn btn-danger btn-sm" id="delete" title="Delete">Delete</a>
+                                            <a href="{{ route('preview.employee', $item->id) }}" target="_blank" class="btn btn-warning btn-sm text-white" title="View Detail">View</a>
+                                            <a href="{{ route('qr_code.download', $item->id) }}" target="_blank" class="btn btn-info btn-sm" title="Download">Download</a>
                                         </td>
                                     </tr>
                                 @endforeach
