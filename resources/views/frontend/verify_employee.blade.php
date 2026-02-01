@@ -107,14 +107,13 @@
                         <td>{{ $employee->end_date }}</td>
                     </tr>
                     <tr>
-                        <th>Status:</th>
-                        <td>
+                        <th colspan="2" class="text-center" style="text-align: center;">
                             @if($employee->status == 1)
-                                <span class="status-active">Active</span>
+                                <h3 class="status-active">ID Card Status: Active</h3>
                             @else
-                                <span class="status-inactive">Inactive</span>
+                                <h3 class="status-inactive">ID Card Status: Expired</h3>
                             @endif
-                        </td>
+                        </th>
                     </tr>
                 </tbody>
             </table>
