@@ -66,7 +66,7 @@
                     <select name="status" class="form-select" aria-label="Default select example">
                         <option selected="">Open this select menu</option>
                         <option value="1">Active</option>
-                        <option value="0">Inactive</option>
+                        <option value="0">Expired</option>
                     </select>
                 </div>
             </div>

@@ -12,8 +12,15 @@ use Illuminate\Support\Carbon;
 class EmployeeController extends Controller
 {
     public function ViewEmployee(){
-        // Auto-expire employees
-        employee::where('end_date', '<', Carbon::now()->format('Y-m-d'))
+        // Auto-expire employees:
+        // 1. If End Date is past (expired).
+        // 2. If Start Date is future (not yet active).
+        $today = Carbon::now()->format('Y-m-d');
+        
+        employee::where(function($query) use ($today) {
+                    $query->where('end_date', '<', $today)
+                          ->orWhere('start_date', '>', $today);
+                })
                 ->where('status', '1')
                 ->update(['status' => '0']);
 
@@ -24,6 +31,8 @@ class EmployeeController extends Controller
     public function AddEmployee(){
         return view('admin.backend.employee.add_employee');
     }
+
+    // ... (StoreEmployee method remains unchanged) ...
 
     public function StoreEmployee(Request $request){
         $request->validate([
@@ -57,6 +66,8 @@ class EmployeeController extends Controller
 
         return redirect()->route('view.employee')->with($notification);
     }
+    
+    // ... (EditEmployee, UpdateEmployee, DeleteEmployee, DetailsEmployee, PreviewEmployee remain unchanged) ...
 
     public function EditEmployee($id){
         $employee = employee::findOrFail($id);
@@ -89,7 +100,6 @@ class EmployeeController extends Controller
             );
 
             return redirect()->route('view.employee')->with($notification);
-
         } else {
 
             employee::findOrFail($employee_id)->update([
@@ -137,11 +147,13 @@ class EmployeeController extends Controller
         $employee = employee::findOrFail($id);
         return view('admin.backend.employee.preview_employee',compact('employee'));
     }
-
+    
     public function VerifyEmployee($id){
         $employee = employee::findOrFail($id);
+        $today = Carbon::now()->format('Y-m-d');
 
-        if ($employee->end_date < Carbon::now()->format('Y-m-d') && $employee->status == '1') {
+        // Check if expired OR not yet started
+        if (($employee->end_date < $today || $employee->start_date > $today) && $employee->status == '1') {
             $employee->update(['status' => '0']);
         }
 
