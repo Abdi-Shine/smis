@@ -165,4 +165,15 @@ class EmployeeController extends Controller
         $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.backend.employee.pdf_employee', compact('employee'));
         return $pdf->download('employee_id_card.pdf');
     }
+
+    public function DownloadQRCode($id){
+        $url = route('verify.employee', $id);
+        $qr_url = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' . $url;
+        
+        $imageContent = file_get_contents($qr_url);
+        
+        return response($imageContent)
+            ->header('Content-Type', 'image/png')
+            ->header('Content-Disposition', 'attachment; filename="qrcode-'.$id.'.png"');
+    }
 }

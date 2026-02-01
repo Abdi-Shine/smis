@@ -72,8 +72,8 @@
     <div class="container">
         <div class="verification-container">
             <!-- Organization Logo -->
-             <!-- Using asset('backend/upload/logo.png') assuming it's the org logo, or generic shield if not available -->
-            <img src="{{ asset('backend/upload/logo.png') }}" class="org-logo" alt="Organization Logo">
+             <!-- Employee Image -->
+            <img src="{{ (!empty($employee->image)) ? url($employee->image) : url('upload/no_image.jpg') }}" class="org-logo" style="width: 120px; height: 120px; object-fit: cover; border-radius: 50%; border: 3px solid #e9ecef;" alt="Employee Image">
 
             <!-- Verified Badge -->
             <div class="verified-badge">
@@ -81,7 +81,7 @@
             </div>
 
             <!-- Details Title -->
-            <div class="details-title">Details</div>
+            <div class="details-title">Supreme Court of Somalia</div>
 
             <!-- Details Table -->
             <table class="table table-bordered table-details">
@@ -109,9 +109,9 @@
                     <tr>
                         <th colspan="2" class="text-center" style="text-align: center;">
                             @if($employee->status == 1)
-                                <h3 class="status-active">ID Card Status: Active</h3>
+                                <h3 class="status-active">Status: Active</h3>
                             @else
-                                <h3 class="status-inactive">ID Card Status: Expired</h3>
+                                <h3 class="status-inactive">Status: Expired</h3>
                             @endif
                         </th>
                     </tr>
