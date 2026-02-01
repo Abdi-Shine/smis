@@ -23,7 +23,7 @@
                                     <th>Position</th>
                                     <th>Gender</th>
                                     <th>Image</th>
-                                    <th>QR Code</th>
+
                                     <th>Start Date</th>
                                     <th>End Date</th>
                                     <th>Status</th>
@@ -40,7 +40,7 @@
                                         <td>
                                             <img src="{{ asset($item->image) }}" style="width:70px; height:40px;">
                                         </td>
-                                        <td>{{ $item->QR_code }}</td>
+
                                         <td>{{ $item->start_date }}</td>
                                         <td>{{ $item->end_date }}</td>
                                         <td>
