@@ -38,7 +38,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/details/employee/{id}', 'DetailsEmployee')->name('details.employee');
         Route::get('/preview/employee/{id}', 'PreviewEmployee')->name('preview.employee');
         Route::get('/download/pdf/employee/{id}', 'DownloadEmployeePDF')->name('download.pdf.employee');
-        Route::get('/upload/employee', 'UploadEmployee')->name('upload.employee');
+        Route::get('/import/employees', 'UploadEmployee')->name('upload.employee');
         Route::post('/import/employee', 'ImportEmployee')->name('import.employee');
         Route::get('/download/qrcode/{id}', 'DownloadQRCode')->name('qr_code.download');
     });

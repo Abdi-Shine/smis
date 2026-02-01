@@ -17,8 +17,8 @@ class EmployeeImport implements ToModel, WithStartRow
     public function model(array $row)
     {
         return new employee([
-            'name'     => $row[0],
-            'employee_id'    => $row[1],
+            'employee_id' => $row[0],
+            'name'     => $row[1],
             'position' => $row[2],
             'gender' => $row[3],
             'start_date' => $row[4], // Assumes YYYY-MM-DD

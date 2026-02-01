@@ -55,6 +55,9 @@
                                         <li>
                                             <a href="{{ route('view.employee') }}" class="tp-link">View Employee</a>
                                         </li>
+                                        <li>
+                                            <a href="{{ route('upload.employee') }}" class="tp-link">Upload Employee</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>
