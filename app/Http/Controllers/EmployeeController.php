@@ -12,6 +12,11 @@ use Illuminate\Support\Carbon;
 class EmployeeController extends Controller
 {
     public function ViewEmployee(){
+        // Auto-expire employees
+        employee::where('end_date', '<', Carbon::now()->format('Y-m-d'))
+                ->where('status', '1')
+                ->update(['status' => '0']);
+
         $employees = employee::latest()->get();
         return view('admin.backend.employee.view_employee',compact('employees'));
     }
@@ -135,6 +140,11 @@ class EmployeeController extends Controller
 
     public function VerifyEmployee($id){
         $employee = employee::findOrFail($id);
+
+        if ($employee->end_date < Carbon::now()->format('Y-m-d') && $employee->status == '1') {
+            $employee->update(['status' => '0']);
+        }
+
         return view('frontend.verify_employee',compact('employee'));
     }
 
