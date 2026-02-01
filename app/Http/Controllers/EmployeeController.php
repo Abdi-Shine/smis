@@ -1,0 +1,146 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\employee;
+use Illuminate\Http\Request;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Carbon;
+
+class EmployeeController extends Controller
+{
+    public function ViewEmployee(){
+        $employees = employee::latest()->get();
+        return view('admin.backend.employee.view_employee',compact('employees'));
+    }
+
+    public function AddEmployee(){
+        return view('admin.backend.employee.add_employee');
+    }
+
+    public function StoreEmployee(Request $request){
+        $request->validate([
+            'name' => 'required',
+            'status' => 'required',
+        ]);
+
+        $save_url = null;
+        if($request->file('image')){
+            $image = $request->file('image');
+            $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('upload/employee'), $name_gen);
+            $save_url = 'upload/employee/'.$name_gen;
+        }
+
+        employee::insert([
+            'name' => $request->name,
+            'position' => $request->position,
+            'gender' => $request->gender,
+            'image' => $save_url,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            'status' => $request->status,
+            'created_at' => Carbon::now(),
+        ]);
+
+        $notification = array(
+            'message' => 'Employee Inserted Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('view.employee')->with($notification);
+    }
+
+    public function EditEmployee($id){
+        $employee = employee::findOrFail($id);
+        return view('admin.backend.employee.edit_employee',compact('employee'));
+    }
+
+    public function UpdateEmployee(Request $request){
+        $employee_id = $request->id;
+
+        if($request->file('image')){
+            $image = $request->file('image');
+            $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('upload/employee'), $name_gen);
+            $save_url = 'upload/employee/'.$name_gen;
+
+            employee::findOrFail($employee_id)->update([
+                'name' => $request->name,
+                'position' => $request->position,
+                'gender' => $request->gender,
+                'image' => $save_url,
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date,
+                'status' => $request->status,
+                'updated_at' => Carbon::now(), 
+            ]);
+
+            $notification = array(
+                'message' => 'Employee Updated With Image Successfully',
+                'alert-type' => 'success'
+            );
+
+            return redirect()->route('view.employee')->with($notification);
+
+        } else {
+
+            employee::findOrFail($employee_id)->update([
+                'name' => $request->name,
+                'position' => $request->position,
+                'gender' => $request->gender,
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date,
+                'status' => $request->status,
+                'updated_at' => Carbon::now(), 
+            ]);
+
+            $notification = array(
+                'message' => 'Employee Updated Without Image Successfully',
+                'alert-type' => 'success'
+            );
+
+            return redirect()->route('view.employee')->with($notification);
+        }
+    }
+
+    public function DeleteEmployee($id){
+        $employee = employee::findOrFail($id);
+        $img = $employee->image;
+        if($img){
+             unlink($img);
+        }
+
+        employee::findOrFail($id)->delete();
+
+        $notification = array(
+            'message' => 'Employee Deleted Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+    }
+
+    public function DetailsEmployee($id){
+        $employee = employee::findOrFail($id);
+        return view('admin.backend.employee.details_employee',compact('employee'));
+    }
+
+    public function PreviewEmployee($id){
+        $employee = employee::findOrFail($id);
+        return view('admin.backend.employee.preview_employee',compact('employee'));
+    }
+
+    public function VerifyEmployee($id){
+        $employee = employee::findOrFail($id);
+        return view('frontend.verify_employee',compact('employee'));
+    }
+
+    public function DownloadEmployeePDF($id){
+        $employee = employee::findOrFail($id);
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.backend.employee.pdf_employee', compact('employee'));
+        return $pdf->download('employee_id_card.pdf');
+    }
+}
