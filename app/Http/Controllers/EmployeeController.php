@@ -49,6 +49,7 @@ class EmployeeController extends Controller
         }
 
         employee::insert([
+            'employee_id' => $request->employee_id,
             'name' => $request->name,
             'position' => $request->position,
             'gender' => $request->gender,
@@ -84,6 +85,7 @@ class EmployeeController extends Controller
             $save_url = 'upload/employee/'.$name_gen;
 
             employee::findOrFail($employee_id)->update([
+                'employee_id' => $request->employee_id,
                 'name' => $request->name,
                 'position' => $request->position,
                 'gender' => $request->gender,
@@ -103,6 +105,7 @@ class EmployeeController extends Controller
         } else {
 
             employee::findOrFail($employee_id)->update([
+                'employee_id' => $request->employee_id,
                 'name' => $request->name,
                 'position' => $request->position,
                 'gender' => $request->gender,

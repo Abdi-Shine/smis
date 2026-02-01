@@ -19,12 +19,11 @@
                             <thead>
                                 <tr>
                                     <th>Sl</th>
+                                    <th>ID</th>
                                     <th>Name</th>
                                     <th>Position</th>
                                     <th>Gender</th>
                                     <th>Image</th>
-
-                                    <th>Start Date</th>
                                     <th>End Date</th>
                                     <th>Status</th>
                                     <th>Action</th>
@@ -32,8 +31,8 @@
                             </thead>
                             <tbody>
                                 @foreach ($employees as $key => $item)
-                                    <tr>
                                         <td>{{ $key + 1 }}</td>
+                                        <td>{{ $item->employee_id }}</td>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->position }}</td>
                                         <td>{{ $item->gender }}</td>
@@ -41,7 +40,7 @@
                                             <img src="{{ asset($item->image) }}" style="width:70px; height:40px;">
                                         </td>
 
-                                        <td>{{ $item->start_date }}</td>
+
                                         <td>{{ $item->end_date }}</td>
                                         <td>
                                             @if($item->status == 1)

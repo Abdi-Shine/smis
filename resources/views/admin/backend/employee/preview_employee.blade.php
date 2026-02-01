@@ -153,7 +153,7 @@
 
                                 <div class="field-group mb-1">
                                     <div class="field-label" style="font-size: 7px; color: #000; font-weight: bold;">Taxane Aqoonsi / ID No</div>
-                                    <div class="field-value" style="font-size: 10px; font-weight: bold; color: #000; border-bottom: 1px solid #ccc;">{{ $employee->id }}</div>
+                                    <div class="field-value" style="font-size: 10px; font-weight: bold; color: #000; border-bottom: 1px solid #ccc;">{{ $employee->employee_id }}</div>
                                 </div>
                                 
                                 <div class="field-group mb-1">

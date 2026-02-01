@@ -88,7 +88,7 @@
                 <tbody>
                     <tr>
                         <th>ID No:</th>
-                        <td>{{ $employee->id }}</td>
+                        <td>{{ $employee->employee_id }}</td>
                     </tr>
                     <tr>
                         <th>Name:</th>

@@ -224,7 +224,7 @@
                     </div>
                     <div class="field-group">
                         <div class="field-label">Taxane Aqoonsi / ID No</div>
-                        <div class="field-value">{{ $employee->id }}</div>
+                        <div class="field-value">{{ $employee->employee_id }}</div>
                     </div>
                     <div class="field-group">
                         <div class="field-label">Jinsi / Gender</div>

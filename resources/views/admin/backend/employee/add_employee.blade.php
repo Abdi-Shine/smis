@@ -16,6 +16,14 @@
                 @csrf
 
             <div class="row mb-3">
+                <label for="employee_id" class="col-sm-2 col-form-label">Employee ID</label>
+                <div class="col-sm-10">
+                    <input class="form-control" type="text" name="employee_id" id="employee_id">
+                </div>
+            </div>
+            <!-- end row -->
+
+            <div class="row mb-3">
                 <label for="name" class="col-sm-2 col-form-label">Employee Name</label>
                 <div class="col-sm-10">
                     <input class="form-control" type="text" name="name" id="name" required>
