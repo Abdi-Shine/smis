@@ -41,7 +41,7 @@ class EmployeeController extends Controller
                 ->where('status', '1')
                 ->update(['status' => '0']);
 
-        $employees = employee::latest()->get();
+        $employees = employee::orderBy('employee_id', 'asc')->get();
         return view('admin.backend.employee.view_employee',compact('employees'));
     }
 
