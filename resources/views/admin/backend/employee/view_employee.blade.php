@@ -24,13 +24,14 @@
                                     <th>Position</th>
                                     <th>Gender</th>
                                     <th>Image</th>
-                                    <th>End Date</th>
+
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($employees as $key => $item)
+                                    <tr>
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $item->employee_id }}</td>
                                         <td>{{ $item->name }}</td>
@@ -41,7 +42,7 @@
                                         </td>
 
 
-                                        <td>{{ $item->end_date }}</td>
+
                                         <td>
                                             @if($item->status == 1)
                                             <span class="badge bg-success">Active</span>
@@ -67,30 +68,5 @@
     </div>
     </div>
 </div>
-
-<!-- DataTables CSS -->
-<link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
-
-<!-- DataTables JS -->
-<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
-
-<script>
-    $(document).ready(function() {
-        $('#datatable').DataTable({
-            "pagingType": "full_numbers", // Alternative pagination
-            "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
-            ],
-            responsive: true,
-            language: {
-                search: "_INPUT_",
-                searchPlaceholder: "Search records",
-            }
-        });
-    });
-</script>
 
 @endsection

@@ -41,17 +41,14 @@ class EmployeeController extends Controller
                 ->where('status', '1')
                 ->update(['status' => '0']);
 
-        $employees = employee::orderBy('employee_id', 'asc')->get();
+        $employees = employee::orderBy('id', 'asc')->get();
         return view('admin.backend.employee.view_employee',compact('employees'));
     }
 
     public function AddEmployee(){
-        $count = employee::max('id') + 1;
-        $generated_id = 'MS' . $count;
+        $generated_id = 'Auto Generated';
         return view('admin.backend.employee.add_employee', compact('generated_id'));
     }
-
-    // ... (StoreEmployee method remains unchanged) ...
 
     public function StoreEmployee(Request $request){
         $request->validate([
@@ -67,11 +64,8 @@ class EmployeeController extends Controller
             $save_url = 'upload/employee/'.$name_gen;
         }
 
-        $count = employee::max('id') + 1;
-        $generated_id = 'MS' . $count;
-
-        employee::insert([
-            'employee_id' => $generated_id,
+        $employee = employee::create([
+            'employee_id' => 'TEMP_'.uniqid(),
             'name' => $request->name,
             'position' => $request->position,
             'gender' => $request->gender,
@@ -80,6 +74,10 @@ class EmployeeController extends Controller
             'end_date' => $request->end_date,
             'status' => $request->status,
             'created_at' => Carbon::now(),
+        ]);
+
+        $employee->update([
+            'employee_id' => 'MS' . $employee->id,
         ]);
 
         $notification = array(

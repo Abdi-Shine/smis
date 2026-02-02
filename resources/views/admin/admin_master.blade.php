@@ -19,6 +19,9 @@
         <!-- Icons -->
         <link href="{{asset('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
 
+        <!-- DataTables CSS -->
+        <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+
     </head>
 
     <!-- body start -->
@@ -137,6 +140,30 @@
                     }
                     }) 
                 });
+            });
+        </script>
+
+        <!-- DataTables JS -->
+        <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                // Check if datatable exists before init to avoid errors
+                if($('#datatable').length > 0) {
+                    $('#datatable').DataTable({
+                        "pagingType": "full_numbers",
+                        "lengthMenu": [
+                            [10, 25, 50, -1],
+                            [10, 25, 50, "All"]
+                        ],
+                        responsive: true,
+                        language: {
+                            search: "_INPUT_",
+                            searchPlaceholder: "Search records",
+                        }
+                    });
+                }
             });
         </script>
 

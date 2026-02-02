@@ -55,7 +55,7 @@
             <div class="row mb-3">
                 <label for="start_date" class="col-sm-2 col-form-label">Start Date</label>
                 <div class="col-sm-10">
-                    <input class="form-control" type="date" name="start_date" id="start_date">
+                    <input class="form-control" type="date" name="start_date" id="start_date" value="{{ date('Y-m-d') }}">
                 </div>
             </div>
             <!-- end row -->
