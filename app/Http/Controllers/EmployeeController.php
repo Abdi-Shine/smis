@@ -66,7 +66,7 @@ class EmployeeController extends Controller
         }
 
         $count = employee::max('id') + 1;
-        $generated_id = 'MSO' . $count;
+        $generated_id = 'MS' . $count;
 
         employee::insert([
             'employee_id' => $generated_id,
