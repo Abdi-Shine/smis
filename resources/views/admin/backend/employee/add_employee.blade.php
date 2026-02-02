@@ -15,7 +15,12 @@
             <form method="post" action="{{ route('store.employee') }}" enctype="multipart/form-data">
                 @csrf
 
-            <!-- Employee ID is now auto-generated -->
+            <div class="row mb-3">
+                <label for="employee_id" class="col-sm-2 col-form-label">Employee ID</label>
+                <div class="col-sm-10">
+                    <input class="form-control" type="text" name="employee_id" id="employee_id" value="{{ $generated_id }}" readonly>
+                </div>
+            </div>
             <!-- end row -->
 
             <div class="row mb-3">

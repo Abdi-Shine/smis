@@ -46,7 +46,9 @@ class EmployeeController extends Controller
     }
 
     public function AddEmployee(){
-        return view('admin.backend.employee.add_employee');
+        $count = employee::max('id') + 1;
+        $generated_id = 'MS' . $count;
+        return view('admin.backend.employee.add_employee', compact('generated_id'));
     }
 
     // ... (StoreEmployee method remains unchanged) ...
