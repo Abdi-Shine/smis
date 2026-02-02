@@ -65,8 +65,11 @@ class EmployeeController extends Controller
             $save_url = 'upload/employee/'.$name_gen;
         }
 
+        $count = employee::max('id') + 1;
+        $generated_id = 'MSO' . $count;
+
         employee::insert([
-            'employee_id' => $request->employee_id,
+            'employee_id' => $generated_id,
             'name' => $request->name,
             'position' => $request->position,
             'gender' => $request->gender,
